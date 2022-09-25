@@ -10,15 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
+
 
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,12 +25,9 @@ import javax.ws.rs.ext.Provider;
 
 import conn.Connections;
 import data.User;
-import data.Product;
 
 
 
-
-//@Provider
 @Path("/loginservice")
 public class LoginService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -42,30 +36,15 @@ public class LoginService extends HttpServlet {
 	@Context
 	HttpServletResponse response;
 	//@CrossOrigin(origins = "http://localhost:8080")
-//	 public LoginService() {
-//	        super();
-//	        
-//	        // TODO Auto-generated constructor stub
-//	    }
+
 	
 	
 	@GET
 	@Path("/check/{p1}/{p2}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<String> checkUser(@PathParam("p1") String user, @PathParam("p2") String pass)   {
-//		response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS");
-//		response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-//		response.addHeader("Access-Control-Allow-Headers","Content-Type,Access-Control-Allow-Headers,X-Requested-With,Authorization");
-		
+	
 		System.out.println("Tästä alkaa!");
-		
-//		Connection conn=null;
-//		try {
-//		conn=Connections.getConnection();	
-//		}
-//		catch(Exception e) { 
-//		System.out.println("Ei yhteyttä tietokantaan");
-//		}
 	
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
@@ -74,12 +53,8 @@ public class LoginService extends HttpServlet {
 		
 		//TÄSTÄ ALKAA SALASANAN HASH-JUPINAT
 		
-		
 		String hashedPassword = passwordHasher(pass);
 		System.out.println(hashedPassword);
-		
-		
-		
 		
 		
 		// TARKISTUS 
@@ -98,8 +73,6 @@ public class LoginService extends HttpServlet {
 		}
 	
 
-
-	
 	
 	public Boolean readUser(String user, String pass) {
 		
@@ -158,22 +131,22 @@ public static String passwordHasher(String pass)
 
   try 
   {
-    // Create MessageDigest instance for MD5
+   
     MessageDigest md = MessageDigest.getInstance("MD5");
 
-    // Add password bytes to digest
+    
     md.update(passwordToHash.getBytes());
 
-    // Get the hash's bytes
+   
     byte[] bytes = md.digest();
 
-    // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+   
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < bytes.length; i++) {
       sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
     }
 
-    // Get complete hashed password in hex format
+
     generatedPassword = sb.toString();
   } catch (NoSuchAlgorithmException e) {
     e.printStackTrace();
