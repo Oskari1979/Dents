@@ -65,9 +65,9 @@ public class Connections {
 		HikariConfig config = new HikariConfig();
 		 // Configure which instance and what database user to connect with.
 		config.setDriverClassName(System.getProperty("drivername")); // see appengine-web.xml
-		config.setJdbcUrl("jdbc:mysql://localhost:3306/"+System.getProperty("localdatabasename")+"?useSSL=false"); // see appengine-web.xml
-		config.setUsername(System.getProperty("localusername")); // see appengine-web.xml
-		config.setPassword(System.getProperty("localpassword")); // see appengine-web.xml
+		config.setJdbcUrl("eu-cdbr-west-03.cleardb.net:3306/"+System.getProperty("heroku_5d088b0bcb3175c")+"?useSSL=true"); // see appengine-web.xml
+		config.setUsername(System.getProperty("bf36220d22a5fe")); // see appengine-web.xml
+		config.setPassword(System.getProperty("630e7175")); // see appengine-web.xml
 		
 		  // Initialize the connection pool using the configuration object.
 		pool = new HikariDataSource(config);
